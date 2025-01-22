@@ -1,1 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
+@use './assets/styles/abstracts/reset';
+@use './assets/styles/abstracts/mixins';
+@use './assets/styles/base/typography';
+@use './assets/styles/base/utilities';
