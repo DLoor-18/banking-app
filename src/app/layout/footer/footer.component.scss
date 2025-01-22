@@ -1,0 +1,25 @@
+@use '../../../assets/styles/abstracts/variables' as variables;
+
+:host{
+    footer {
+        background: variables.$footer-bg-color;
+    }
+
+}
+.footer {
+    &__content {
+        background: transparent;
+        width: 1000px;
+        margin: 0 auto;
+        height: 50px;
+        text-align: center;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &__copyright {
+            color: variables.$footer-text-color;
+        }
+    }
+}
