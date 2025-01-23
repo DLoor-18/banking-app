@@ -1,34 +1,61 @@
 {
-  "hash": "53aa70c9",
-  "configHash": "4256fc7e",
+  "hash": "fdb6a852",
+  "configHash": "b0788be9",
   "lockfileHash": "fdf5c0ee",
-  "browserHash": "7adc79eb",
+  "browserHash": "a076ae37",
   "optimized": {
     "@angular/core": {
       "src": "../../../../../../node_modules/@angular/core/fesm2022/core.mjs",
       "file": "@angular_core.js",
-      "fileHash": "bedc9582",
+      "fileHash": "f29961fb",
       "needsInterop": false
     },
     "@angular/platform-browser": {
       "src": "../../../../../../node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs",
       "file": "@angular_platform-browser.js",
-      "fileHash": "1c6e6e60",
+      "fileHash": "4072feaa",
       "needsInterop": false
     },
     "@angular/router": {
       "src": "../../../../../../node_modules/@angular/router/fesm2022/router.mjs",
       "file": "@angular_router.js",
-      "fileHash": "165cffe9",
+      "fileHash": "88836cef",
+      "needsInterop": false
+    },
+    "@angular/forms": {
+      "src": "../../../../../../node_modules/@angular/forms/fesm2022/forms.mjs",
+      "file": "@angular_forms.js",
+      "fileHash": "9bcf12e0",
+      "needsInterop": false
+    },
+    "@angular/common/http": {
+      "src": "../../../../../../node_modules/@angular/common/fesm2022/http.mjs",
+      "file": "@angular_common_http.js",
+      "fileHash": "a6af8fa6",
+      "needsInterop": false
+    },
+    "rxjs": {
+      "src": "../../../../../../node_modules/rxjs/dist/esm5/index.js",
+      "file": "rxjs.js",
+      "fileHash": "3d0036c5",
       "needsInterop": false
     }
   },
   "chunks": {
-    "chunk-XUG2OY5P": {
-      "file": "chunk-XUG2OY5P.js"
+    "chunk-45YZFTYM": {
+      "file": "chunk-45YZFTYM.js"
     },
-    "chunk-6CJ6BJGL": {
-      "file": "chunk-6CJ6BJGL.js"
+    "chunk-R7VVA3Z4": {
+      "file": "chunk-R7VVA3Z4.js"
+    },
+    "chunk-YRN32IPA": {
+      "file": "chunk-YRN32IPA.js"
+    },
+    "chunk-IXLGA3GD": {
+      "file": "chunk-IXLGA3GD.js"
+    },
+    "chunk-5TID76VL": {
+      "file": "chunk-5TID76VL.js"
     }
   }
 }

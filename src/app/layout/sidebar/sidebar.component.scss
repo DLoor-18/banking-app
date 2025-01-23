@@ -1,0 +1,203 @@
+@use '../../../assets/styles/abstracts/variables' as variables;
+
+@import url("https://fonts.googleapis.com/css?family=Lato:400,700&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+ul {
+  list-style: none;
+}
+
+a,
+button {
+  color: inherit;
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  background: none;
+  cursor: pointer;
+}
+
+label {
+  cursor: pointer;
+}
+
+button,
+input {
+  border: none;
+}
+
+img {
+  display: block;
+}
+
+body {
+  font: 16px/1.5 "Lato", sans-serif;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: auto;
+  padding-top: 20px;
+  width: variables.$sidebar-width;
+  color: variables.$sidebar-txtColor;
+  background: variables.$sidebar-bgColor;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.sidebar .logo {
+  display: block;
+  margin: 0 15px;
+}
+
+.sidebar .logo img {
+  max-width: 180px;
+  fill: variables.$white;
+}
+
+.sidebar .toggle-mob-menu {
+  display: none;
+  margin-left: 5px;
+  padding: 4px;
+  background: variables.$page-content-blockColor;
+  border-radius: variables.$border-radius;
+}
+
+.sidebar .toggle-mob-menu img {
+  fill: variables.$black;
+  transition: transform 0.2s;
+}
+
+.sidebar .admin-menu {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  margin-top: 35px;
+}
+
+.sidebar .admin-menu li:nth-last-child(2) {
+  margin-bottom: 35px;
+}
+
+.sidebar .admin-menu li:last-child {
+  margin-top: auto;
+  margin-bottom: 20px;
+}
+
+.sidebar .admin-menu li > * {
+  width: 100%;
+  padding: 12px 15px;
+}
+
+.sidebar .admin-menu .switcher {
+  display: inline-block;
+  width: auto;
+}
+
+.sidebar .admin-menu .menu-heading h3 {
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-size: 12px;
+  margin-top: 12px;
+  color: variables.$sidebar-headingColor;
+}
+
+.sidebar .admin-menu img {
+  width: 20px;
+  height: 20px;
+  fill: variables.$sidebar-txtColor;
+  margin-right: 10px;
+}
+
+.sidebar .admin-menu a,
+.sidebar .admin-menu button {
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.sidebar .admin-menu a:hover,
+.sidebar .admin-menu a:focus,
+.sidebar .admin-menu button:hover,
+.sidebar .admin-menu button:focus {
+  background: variables.$sidebar-bgColor-hover;
+  color: variables.$blue;
+  outline: none;
+}
+
+.sidebar .admin-menu a:hover img,
+.sidebar .admin-menu a:focus img,
+.sidebar .admin-menu button:hover img,
+.sidebar .admin-menu button:focus img {
+  fill: variables.$blue;
+}
+
+@media screen and (max-width: 767px) {
+  .sidebar,
+  .page-content {
+    position: static;
+    width: 100%;
+  }
+
+  .sidebar {
+    padding: 10px;
+  }
+
+  .sidebar nav {
+    flex-direction: row;
+  }
+
+  .sidebar .logo {
+    margin: 0;
+  }
+
+  .sidebar .logo img {
+    width: 83px;
+    height: 35px;
+  }
+
+  .sidebar .toggle-mob-menu {
+    display: block;
+  }
+
+  .sidebar .admin-menu {
+    position: absolute;
+    left: 98px;
+    top: 57px;
+    margin-top: 0;
+    z-index: 2;
+    border-radius: variables.$border-radius;
+    background: variables.$sidebar-bgColor;
+    visibility: hidden;
+    opacity: 0;
+    transform: scale(0.95);
+    transition: all 0.2s;
+  }
+
+  .sidebar .admin-menu li:nth-last-child(2) {
+    margin-bottom: 12px;
+  }
+
+  .sidebar .admin-menu li:last-child button,
+  .search-and-user .admin-profile .greeting {
+    display: none;
+  }
+
+}

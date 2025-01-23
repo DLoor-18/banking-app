@@ -4,7 +4,6 @@
 
 body {
     background-color: #e9e9e9;
-    // font-family: 'Montserrat', sans-serif;
     font-size: 16px;
     line-height: 1.25;
     letter-spacing: 1px;
@@ -19,7 +18,7 @@ body {
     width: 100%;
     max-width: 525px;
     min-height: 680px;
-    background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/283591/login-background.jpg);
+    background-image: url('../../../assets/images/login-background.jpg');
     box-shadow: 0 50px 70px -20px rgba(0, 0, 0, 0.85);
 }
 
@@ -88,7 +87,7 @@ body {
 
         a:hover:after,
         &--active a:after {
-            background-color: rgb(17, 97, 237);
+            background-color: #1161ed;
             height: 2px;
             right: 0;
             bottom: 2px;

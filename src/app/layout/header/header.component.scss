@@ -1,0 +1,43 @@
+@use '../../../assets/styles/abstracts/variables' as variables;
+
+:host {
+    header {
+        background: variables.$header-bg-color;
+        border-bottom: 2px solid #242e4259;
+    }
+}
+
+
+.header__content {
+    display: flex;
+    align-items: center;
+    background: transparent;
+    height: 60px;
+
+    &__right {
+        list-style: none;
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+
+        &__item {
+            margin-left: 10px;
+            font-size: 1rem;
+            color: variables.$header-text-color;
+        }
+
+        &__info {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            color: variables.$header-text-color;
+            text-decoration: none;
+        }
+
+        img {
+            width: 35px;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+    }
+}

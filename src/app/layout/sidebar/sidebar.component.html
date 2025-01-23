@@ -1,1 +1,32 @@
-<p>sidebar works!</p>
+<section class="sidebar">
+    <nav>
+        <a href="#0" aria-label="forecastr logo" class="logo">
+          <img src="assets/images/logo.png" aria-hidden="true">
+        </a>
+        <button class="toggle-mob-menu" aria-expanded="false" aria-label="open menu">
+          <img src="assets/svgs/down.svg" aria-hidden="true">
+        </button>
+
+      <ul class="admin-menu">
+        @for (option of menu; track $index) {
+            <li [class]="option.section ? 'menu-heading' : ''">
+                @if (option.section) {
+                    <h3>{{option.item}}</h3>
+                } @else {
+                    <a [href]="option.href">
+                      <img [src]="option.svg" aria-hidden="true">
+                      <span>{{option.item}}</span>
+                    </a>
+                }
+            </li>
+        }
+        
+        <li>
+          <button class="collapse-btn" aria-expanded="true" aria-label="collapse menu">
+            <img src="assets/svgs/collapse.svg" aria-hidden="true">
+            <span>Collapse</span>
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </section>
