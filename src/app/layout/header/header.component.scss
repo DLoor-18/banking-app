@@ -39,5 +39,57 @@
             border-radius: 5px;
             margin-right: 10px;
         }
+
+    }
+
+    &__user-options:hover {
+        cursor: pointer;
+        transition: 10s;
+
+        menu {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+
+    &__menu {
+        display: flex;
+        position: absolute;
+        right: 0;
+        padding: 10px 10px;
+        width: 150px;
+        top: 60px;
+        list-style: none;
+        background: #dadada59;
+        border-radius: 4px;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.2s, visibility 0.2s;
+
+        &__item {
+            text-decoration: none;
+
+            button:hover {
+                background: #ffffff;
+            }
+
+            button {
+                display: flex;
+                align-items: center;
+                border-radius: 4px;
+                width: 130px;
+                padding: 4px 10px;
+                cursor: pointer;
+                border: none;
+            }
+
+            img {
+                width: 25px;
+            }
+
+            span {
+                font-size: 18px;
+            }
+        }
     }
 }
