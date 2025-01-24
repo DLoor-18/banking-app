@@ -1,4 +1,8 @@
-<div [class]=" show && 'toast toast--' + toastData?.type + ' toast--show'" 
+<div class="toast" [ngClass]="{
+    'toast--info': toastData?.type == 'info',
+    'toast--success': toastData?.type == 'success',
+    'toast--error': toastData?.type == 'error',
+    'toast--show': show}" 
      role="alert" aria-live="assertive"
      >
   <div class="toast__header">

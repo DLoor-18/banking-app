@@ -1,4 +1,4 @@
-import { Component, inject, input, OnInit, output } from '@angular/core';
+import { Component, inject, input, OnChanges, OnInit, output, SimpleChanges } from '@angular/core';
 import { ITableHeader } from '../../interfaces/icomponents/table-header.interface';
 import { BadgeComponent } from "../badge/badge.component";
 import { IBadge } from '../../interfaces/icomponents/badge.interface';
@@ -15,7 +15,7 @@ import { TableEventsService } from '../../services/utils/table-events.service';
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss'
 })
-export class TableComponent implements OnInit {
+export class TableComponent implements OnInit, OnChanges{
   dataHeader = input<ITableHeader[]>([]);
   dataBody = input<any[]>([]);
   dataBodyFiltered: any[] = [];
@@ -42,9 +42,13 @@ export class TableComponent implements OnInit {
     this.dataBodyFiltered = this.dataBody();
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    this.onSearch(this.inputData.value);
+  }
+
   getBadge(value: string): IBadge {
     return {
-      type: value === "Active" ? "info" : "danger",
+      type: value === "ACTIVE" ? "info" : "danger",
       value: value
     } as IBadge;
   }

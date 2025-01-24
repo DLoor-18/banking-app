@@ -1,6 +1,6 @@
-import { Component, EventEmitter, input, OnChanges, output, SimpleChanges } from '@angular/core';
-import { ICard } from '../../interfaces/icomponents/card.interface';
 import { CommonModule } from '@angular/common';
+import { Component, input, output } from '@angular/core';
+import { ICard } from '../../interfaces/icomponents/card.interface';
 
 @Component({
   selector: 'app-card',
@@ -8,17 +8,13 @@ import { CommonModule } from '@angular/common';
   templateUrl: './card.component.html',
   styleUrl: './card.component.scss'
 })
-export class CardComponent implements OnChanges {
+export class CardComponent {
   cardData = input<ICard>();
   componentOutput = output<any>();
   componentOutputs:  { [key: string]: (event: any) => void } = {};
 
   onComponentOutput(event: any){
-    debugger
     this.componentOutput.emit(event);
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-   console.log(changes);
-  }
 }

@@ -9,8 +9,16 @@ export class ToastService {
   private toastSubject = new Subject<IToast>();
   $dataToast: Observable<IToast> = this.toastSubject.asObservable();
 
-  emitToast(dataToast: IToast): void {
-    this.toastSubject.next(dataToast);
+  emitToast(title: string, message: string, type: string, duration: number | 3000, close: boolean | true): void {
+    let dataToast = {
+      title: title,
+      message: message,
+      type: type,
+      duration: duration,
+      close: close
+    }
+
+    this.toastSubject.next(dataToast as IToast);
   }
 
 }

@@ -8,7 +8,7 @@ export class LoaderService {
   private showSubject = new Subject<boolean>();
   show$: Observable<boolean> = this.showSubject.asObservable();
 
-  emitChange(show: boolean): void {
+  show(show: boolean): void {
     this.showSubject.next(show);
   }
 

@@ -7,16 +7,21 @@ import { TableEventsService } from '../../services/utils/table-events.service';
 import { Subject, takeUntil } from 'rxjs';
 import { ToastComponent } from "../../components/toast/toast.component";
 import { ToastService } from '../../services/utils/toast.service';
+import { CustomerService } from '../../services/customer.service';
+import { LoaderService } from '../../services/utils/loader.service';
+import { LoaderComponent } from "../../components/loader/loader.component";
 
 @Component({
   selector: 'app-customer',
-  imports: [CardComponent, ToastComponent],
+  imports: [CardComponent, ToastComponent, LoaderComponent],
   templateUrl: './customer.component.html',
   styleUrl: './customer.component.scss'
 })
 export class CustomerComponent implements OnInit {
   private destroy$ = new Subject<void>();
+  private customerService = inject(CustomerService);
   private toastService = inject(ToastService);
+  private loaderService = inject(LoaderService);
 
   tableHeader: ITableHeader[] = [
     {
@@ -41,66 +46,36 @@ export class CustomerComponent implements OnInit {
     }
   ];
 
-  tableBody: any[] = [
-    {
-      firstName: "John",
-      lastName: "Doe",
-      identityCard: "123456789",
-      status: "Active"
-    },
-    {
-      firstName: "Jane",
-      lastName: "Doe",
-      identityCard: "987654321",
-      status: "Inactive"
-    },
-    {
-      firstName: "John",
-      lastName: "Doe",
-      identityCard: "123456789",
-      status: "Active"
-    },
-    {
-      firstName: "Jane",
-      lastName: "Doe",
-      identityCard: "987654321",
-      status: "Inactive"
-    },
-    {
-      firstName: "John",
-      lastName: "Doe",
-      identityCard: "123456789",
-      status: "Active"
-    }
-  ];
-
   cardData: ICard = {
     header: "Customers",
     component: TableComponent,
     componentInputs: {
       dataHeader: this.tableHeader,
-      dataBody: this.tableBody
+      dataBody: []
     }
   };
   
-
-
   constructor(private eventBusService: TableEventsService){
     this.eventBusService.event$.pipe(takeUntil(this.destroy$)).subscribe(event => {
-
         console.log("Event Received", event);
-        this.toastService.emitToast({
-            title: "Event Received",
-            message: "test toast...alert",
-            type: "info",
-            duration: 3000,
-            close: true
-        });
+        
     });
-}
-
+  }
 
   ngOnInit(): void {
+    this.getAllCustomers();
+  }
+
+  getAllCustomers(){
+    this.loaderService.show(true);
+    this.customerService.getAllCutomers().subscribe(result => {
+      if(result.length)
+        this.cardData.componentInputs['dataBody'] = result;
+      else
+        this.toastService.emitToast("Error", "No customers found", "danger", 4000, true);
+
+      this.loaderService.show(false);
+    });
   }
 
 }

@@ -6,13 +6,15 @@
     right: 10px;
     border-radius: 4px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    display: none;
     min-width: 300px;
-    display: none;
-    visibility: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s, visibility 0.2s;
+    
     &--show{
         display: block;
-        visibility: 1;
+        opacity: 1;
+        visibility: visible;
     }
 
     &__header {

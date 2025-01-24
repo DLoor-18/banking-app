@@ -11,7 +11,7 @@ import { IAuthResponse } from '../interfaces/auth-response.interface';
 export class AuthService {
   private http = inject(HttpClient);
 
-  execute(request: IAuth): Observable<IAuthResponse> {
+  auth(request: IAuth): Observable<IAuthResponse> {
     return this.http.post<IAuthResponse>(environment.baseApi + "/auth/login", request);
   }
 

@@ -5,7 +5,8 @@ import { LoaderComponent } from "../../components/loader/loader.component";
 import { AuthService } from '../../services/auth.service';
 import { IAuth } from '../../interfaces/auth.interface';
 import { filter } from 'rxjs';
-import { TokenService } from '../../services/token.service';
+import { TokenService } from '../../services/utils/token.service';
+import { LoaderService } from '../../services/utils/loader.service';
 
 @Component({
   selector: 'app-login',
@@ -18,8 +19,7 @@ export class LoginComponent implements OnInit {
   private fb = inject(FormBuilder);
   private authService = inject(AuthService);  
   private tokenService = inject(TokenService);
-
-  loader: boolean =false;
+  private loaderService = inject(LoaderService);
 
   authForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
@@ -28,7 +28,6 @@ export class LoginComponent implements OnInit {
 
   auth() {
     if(this.authForm.valid){
-      this.loader=true;
       this.validateCredentials();
     }
   }
@@ -38,14 +37,14 @@ export class LoginComponent implements OnInit {
   }
 
   validateCredentials() {
-    this.authService.execute(this.authForm.getRawValue() as IAuth)
+    this.loaderService.show(true);
+    this.authService.auth(this.authForm.getRawValue() as IAuth)
     .pipe(
       filter(result => {
         if(result!.token) {
           localStorage.setItem('email', this.getEmail);
           this.tokenService.handleToken(result.token);
 
-          this.loader = false;
           this.router.navigate(['']);
           return true;
         }
@@ -53,7 +52,7 @@ export class LoginComponent implements OnInit {
       })
     )
     .subscribe();
-    this.loader = false;
+    this.loaderService.show(false);
 
   }
 
