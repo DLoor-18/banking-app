@@ -1,0 +1,43 @@
+@use '../../../assets/styles/abstracts/variables' as variables;
+
+.button {
+    width: 100%;
+    display: inline-block;
+    font-weight: 400;
+    color: #ffffff;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    border: 1px solid transparent;
+    margin-bottom: 1rem;
+    padding: .625rem 1.1875rem;
+    font-size: .875rem;
+    line-height: 1.5;
+    border-radius: variables.$global-radius;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+
+    &--info {
+        background-color: variables.$info-color;
+    }
+
+    &--info:hover {
+        background-color: darken(variables.$info-color, 10%);
+    }
+
+    &--success {
+        background-color: variables.$success-color;
+    }
+
+    &--success:hover {
+        background-color: darken(variables.$success-color, 10%);
+    }
+
+    &--danger {
+        background-color: variables.$danger-color;
+    }
+
+    &--danger:hover {
+        background-color: darken(variables.$danger-color, 10%);
+    }
+
+}

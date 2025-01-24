@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoaderComponent } from "../../components/loader/loader.component";
@@ -13,7 +13,7 @@ import { TokenService } from '../../services/token.service';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   private router = inject(Router);
   private fb = inject(FormBuilder);
   private authService = inject(AuthService);  
@@ -49,13 +49,18 @@ export class LoginComponent {
           this.router.navigate(['']);
           return true;
         }
-
         return false;
       })
     )
     .subscribe();
     this.loader = false;
 
+  }
+
+  ngOnInit(): void {
+    if(this.tokenService.isAuthenticated()) {
+      this.router.navigate(['']);
+    }
   }
 
 }

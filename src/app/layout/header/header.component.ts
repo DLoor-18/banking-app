@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TokenService } from '../../services/token.service';
 
@@ -8,9 +8,14 @@ import { TokenService } from '../../services/token.service';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   private router = inject(Router);
   private tokenService = inject(TokenService);
+  emailUser: string = '';
+
+  ngOnInit(): void {
+    this.emailUser = localStorage.getItem('email') ?? '';
+  }
 
   logout() {
     this.tokenService.revokeToken();

@@ -1,3 +1,3 @@
 export enum environment  {
-    'baseApi' = 'localhost:8080/api/'
+    'baseApi' = 'http://localhost:8080/api'
 }

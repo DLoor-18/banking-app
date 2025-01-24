@@ -7,11 +7,11 @@
 
       <ul class="sidebar__content__menu">
         @for (option of menu; track $index) {
-        <li [class]="option.section ? 'sidebar__content__menu--heading' : ''">
+        <li [class]="option.section ? 'sidebar__content__menu--heading' : ''" (click)="option.href && goTo(option.href)">
           @if (option.section) {
           <h3>{{option.item}}</h3>
           } @else {
-          <a [href]="option.href">
+          <a>
             <img [src]="option.svg" aria-hidden="true">
             <span>{{option.item}}</span>
           </a>

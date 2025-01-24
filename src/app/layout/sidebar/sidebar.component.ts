@@ -1,4 +1,5 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, inject, OnInit, Renderer2 } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -12,6 +13,8 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   private sidebar: HTMLElement | null = null;
   private collapsedClass = 'sidebar--collapsed';
 
+  private router = inject(Router);
+
   menu = [
     {
       section: true,
@@ -20,25 +23,25 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     {
       section: false,
       item: "Transactions",
-      href: "#",
+      href: "transaction",
       svg: "assets/svgs/transaction.svg"
     },
     {
       section: false,
       item: "Transaction Types",
-      href: "#",
+      href: "transaction-type",
       svg: "assets/svgs/transaction-type.svg"
     },
     {
       section: false,
       item: "Accounts",
-      href: "#",
+      href: "account",
       svg: "assets/svgs/account.svg"
     },
     {
       section: false,
       item: "Customers",
-      href: "#",
+      href: "customer",
       svg: "assets/svgs/customer.svg"
     },
     {
@@ -48,7 +51,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     {
       section: false,
       item: "Users",
-      href: "#",
+      href: "user",
       svg: "assets/svgs/user.svg"
     }
   ];
@@ -96,6 +99,10 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     this.renderer.setAttribute(this.collapseBtn, 'aria-expanded', String(!ariaExpanded));
     this.renderer.setAttribute(this.collapseBtn, 'aria-label', ariaLabel === 'collapse menu' ? 'expand menu' : 'collapse menu');
     this.cdr.detectChanges()
+  }
+
+  goTo(href: string): void {
+    this.router.navigate([href]);
   }
 
 }

@@ -1,0 +1,13 @@
+<div [class]=" show && 'toast toast--' + toastData?.type + ' toast--show'" 
+     role="alert" aria-live="assertive"
+     >
+  <div class="toast__header">
+    <h2 class="toast__title">{{ toastData?.title }}</h2>
+    <button type="button" class="toast__close-button" aria-label="Close" (click)="closeToast()">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="toast__body">
+    <p class="toast__description">{{ toastData?.message }}</p>
+  </div>
+</div>

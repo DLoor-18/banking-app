@@ -1,0 +1,6 @@
+<button 
+    [class]="'button button--' + buttonData()?.type" 
+    [disabled]="buttonData()?.disabled"
+    (click)="clickedEvent()">
+    {{ buttonData()?.value }} 
+</button>

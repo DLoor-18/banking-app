@@ -1,0 +1,12 @@
+<div class="content">
+    @if (inputData()?.label) {
+        <label class="content__label" [for]="inputData()?.id">{{ inputData()?.label }}</label>
+    }
+    <input class="content__input" 
+    [type]="inputData()?.type" 
+    [(ngModel)]="input" 
+    (input)="inputEvent($event)" 
+    [placeholder]="inputData()?.placeholder"
+    [required]="inputData()?.required ?? false"
+    [disabled]="inputData()?.disabled ?? false">
+</div>

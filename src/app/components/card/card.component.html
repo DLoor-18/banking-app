@@ -1,0 +1,13 @@
+<div class="card">
+    @if (cardData()?.header) {
+        <div class="card__header">
+            <h5>{{ cardData()?.header }}</h5>
+        </div>
+    }
+    <div class="card__body">
+        <ng-container [ngComponentOutlet]="cardData()?.component"
+            [ngComponentOutletInputs]="cardData()?.componentInputs"            
+            (ngComponentOutletOutput)="onComponentOutput($event)"></ng-container>
+
+    </div>
+</div>

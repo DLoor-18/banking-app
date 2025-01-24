@@ -1,6 +1,5 @@
 @use '../../../assets/styles/abstracts/variables' as variables;
-
-@import url("https://fonts.googleapis.com/css?family=Lato:400,700&display=swap");
+@use '../../../assets/styles/abstracts/mixins' as mixins;
 
 .sidebar__content {
     overflow: auto;
@@ -24,7 +23,6 @@
         img {
             max-width: 180px;
             margin: 35px auto 0 auto;
-            fill: variables.$white;
         }
     }
 
@@ -67,8 +65,7 @@
 
         a,
         button {
-            display: flex;
-            align-items: center;
+            @include mixins.content-flex(center);
             font-size: 0.9rem;
             color: inherit;
             text-decoration: none;
@@ -85,7 +82,7 @@
         button:hover,
         button:focus {
             background: variables.$sidebar-bgColor-hover;
-            color: variables.$blue;
+            color: variables.$sidebar-txtColorBlue;
             outline: none;
         }
 
@@ -93,7 +90,7 @@
         a:focus svg,
         button:hover svg,
         button:focus svg {
-            fill: variables.$blue;
+            fill: variables.$sidebar-txtColorBlue;
         }
     }
 
@@ -124,7 +121,7 @@
             top: 57px;
             margin-top: 0;
             z-index: 2;
-            border-radius: variables.$border-radius;
+            border-radius: variables.$sidebar-border-radius;
             background: variables.$sidebar-bgColor;
             visibility: hidden;
             opacity: 0;
