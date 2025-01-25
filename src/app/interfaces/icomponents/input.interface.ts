@@ -4,6 +4,7 @@ export interface IInput {
     value: string,
     placeholder: string,
     type: string,
-    required: boolean,
-    disabled: boolean,
+    formControlName?: string,
+    required?: boolean | true,
+    disabled?: boolean | false
 }

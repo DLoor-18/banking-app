@@ -3,6 +3,7 @@
         <label class="content__label" [for]="inputData()?.id">{{ inputData()?.label }}</label>
     }
     <input class="content__input" 
+    [id]="inputData()?.id"
     [type]="inputData()?.type" 
     [(ngModel)]="input" 
     (input)="inputEvent($event)" 

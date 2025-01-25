@@ -1,0 +1,35 @@
+<div class="form-container">
+  <form action="" [formGroup]="form">
+    <div class="grid">
+      @for (item of formData()?.fields; track $index) {
+      <div [class]="item.class">
+        @if (item.input && item.type === 'input') {
+        <div class="form-container__field">
+          @if (item.input.label) {
+          <label class="form-container__field__label" [for]="item.input.id">{{
+            item.input.label
+          }}</label>
+          }
+          <input
+            class="form-container__field__input"
+            [id]="item.input.id"
+            [type]="item.input.type"
+            [formControlName]="item.input.formControlName ?? ''"
+            [placeholder]="item.input.placeholder"
+            [required]="item.input.required ?? false"
+            [disabled]="item.input.disabled ?? false"
+          />
+        </div>
+        }
+      </div>
+      }
+
+      <div class="col-6 form-container__button">
+        <app-button
+          [buttonData]="formData()?.buttonForm"
+          (clickEvent)="onSubmit()"
+        ></app-button>
+      </div>
+    </div>
+  </form>
+</div>

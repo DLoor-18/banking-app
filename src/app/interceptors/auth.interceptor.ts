@@ -28,7 +28,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
             break;
 
           case 500:
-            toastService.emitToast("Error", "Contact with support", "danger", 4000, true);
+            toastService.emitToast("Error", "Please contact support.", "error", 4000, true);
             break;
 
         } 

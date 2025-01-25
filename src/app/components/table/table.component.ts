@@ -48,7 +48,7 @@ export class TableComponent implements OnInit, OnChanges{
 
   getBadge(value: string): IBadge {
     return {
-      type: value === "ACTIVE" ? "info" : "danger",
+      type: value === "ACTIVE" ? "info" : "error",
       value: value
     } as IBadge;
   }

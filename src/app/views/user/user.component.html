@@ -1,5 +1,10 @@
 <section>
     <app-card [cardData]="cardData"></app-card>
 </section>
+
+@if (showModal) {
+    <app-modal (close)="showModal = false" [modalData]="modalData"></app-modal>
+}
+<app-dialog (clickRightButton)="createUser()" [presentDialog]="presentDialog"></app-dialog>
 <app-loader></app-loader>
 <app-toast></app-toast>

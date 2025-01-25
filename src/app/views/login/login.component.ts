@@ -7,10 +7,12 @@ import { IAuth } from '../../interfaces/auth.interface';
 import { filter } from 'rxjs';
 import { TokenService } from '../../services/utils/token.service';
 import { LoaderService } from '../../services/utils/loader.service';
+import { ToastComponent } from "../../components/toast/toast.component";
+import { ToastService } from '../../services/utils/toast.service';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule, ReactiveFormsModule, LoaderComponent],
+  imports: [FormsModule, ReactiveFormsModule, LoaderComponent, ToastComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
@@ -20,6 +22,7 @@ export class LoginComponent implements OnInit {
   private authService = inject(AuthService);  
   private tokenService = inject(TokenService);
   private loaderService = inject(LoaderService);
+  private toastService = inject(ToastService);
 
   authForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
@@ -47,8 +50,9 @@ export class LoginComponent implements OnInit {
 
           this.router.navigate(['']);
           return true;
+        } else {
+          return false;
         }
-        return false;
       })
     )
     .subscribe();

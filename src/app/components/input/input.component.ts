@@ -1,10 +1,10 @@
 import { Component, input, output } from '@angular/core';
 import { IInput } from '../../interfaces/icomponents/input.interface';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-input',
-  imports: [FormsModule],
+  imports: [FormsModule, ReactiveFormsModule],
   templateUrl: './input.component.html',
   styleUrl: './input.component.scss'
 })

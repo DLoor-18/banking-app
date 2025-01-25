@@ -18,8 +18,8 @@ export class ToastComponent implements OnDestroy{
   show: boolean = false;
 
   constructor() {
-    this.toastService.$dataToast.pipe(takeUntil(this.destroy$)).subscribe(dataToast => {     
-      this.toastData = dataToast;
+    this.toastService.$toastData.pipe(takeUntil(this.destroy$)).subscribe(toastData => {     
+      this.toastData = toastData;
       this.show = true;
       this.startTimer();
     });

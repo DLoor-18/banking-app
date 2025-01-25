@@ -32,12 +32,12 @@
         background-color: darken(variables.$success-color, 10%);
     }
 
-    &--danger {
-        background-color: variables.$danger-color;
+    &--error {
+        background-color: variables.$error-color;
     }
 
-    &--danger:hover {
-        background-color: darken(variables.$danger-color, 10%);
+    &--error:hover {
+        background-color: darken(variables.$error-color, 10%);
     }
 
 }

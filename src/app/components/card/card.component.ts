@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, input, output } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { ICard } from '../../interfaces/icomponents/card.interface';
 
 @Component({
@@ -10,11 +10,6 @@ import { ICard } from '../../interfaces/icomponents/card.interface';
 })
 export class CardComponent {
   cardData = input<ICard>();
-  componentOutput = output<any>();
   componentOutputs:  { [key: string]: (event: any) => void } = {};
-
-  onComponentOutput(event: any){
-    this.componentOutput.emit(event);
-  }
 
 }

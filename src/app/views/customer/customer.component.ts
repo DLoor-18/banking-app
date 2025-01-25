@@ -72,7 +72,7 @@ export class CustomerComponent implements OnInit {
       if(result.length)
         this.cardData.componentInputs['dataBody'] = result;
       else
-        this.toastService.emitToast("Error", "No customers found", "danger", 4000, true);
+        this.toastService.emitToast("Error", "No customers found", "error", 4000, true);
 
       this.loaderService.show(false);
     });

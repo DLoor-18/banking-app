@@ -7,10 +7,10 @@ import { IToast } from '../../interfaces/icomponents/toast.interface';
 })
 export class ToastService {
   private toastSubject = new Subject<IToast>();
-  $dataToast: Observable<IToast> = this.toastSubject.asObservable();
+  $toastData: Observable<IToast> = this.toastSubject.asObservable();
 
   emitToast(title: string, message: string, type: string, duration: number | 3000, close: boolean | true): void {
-    let dataToast = {
+    let toastData = {
       title: title,
       message: message,
       type: type,
@@ -18,7 +18,7 @@ export class ToastService {
       close: close
     }
 
-    this.toastSubject.next(dataToast as IToast);
+    this.toastSubject.next(toastData as IToast);
   }
 
 }

@@ -6,8 +6,7 @@
     }
     <div class="card__body">
         <ng-container [ngComponentOutlet]="cardData()?.component"
-            [ngComponentOutletInputs]="cardData()?.componentInputs"            
-            (ngComponentOutletOutput)="onComponentOutput($event)"></ng-container>
+            [ngComponentOutletInputs]="cardData()?.componentInputs"></ng-container>
 
     </div>
 </div>
