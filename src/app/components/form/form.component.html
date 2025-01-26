@@ -3,7 +3,7 @@
     <div class="grid">
       @for (item of formData()?.fields; track $index) {
       <div [class]="item.class">
-        @if (item.input && item.type === 'input') {
+        @if (item.type === 'input' && item.input) {
         <div class="form-container__field">
           @if (item.input.label) {
           <label class="form-container__field__label" [for]="item.input.id">{{
@@ -17,13 +17,29 @@
             [formControlName]="item.input.formControlName ?? ''"
             [placeholder]="item.input.placeholder"
             [required]="item.input.required ?? false"
-            [disabled]="item.input.disabled ?? false"
           />
+        </div>
+        } @else if (item.type === 'dropdown' && item.dropdown) {
+        <div class="form-container__field">
+          @if (item.dropdown.label) {
+          <label class="form-container__field__label" [for]="item.dropdown.id">{{
+            item.dropdown.label
+          }}</label>
+          }
+          <select
+            class="form-container__field__input"
+            [id]="item.dropdown.id"
+            [formControlName]="item.dropdown.formControlName ?? ''"
+            [required]="item.dropdown.required ?? false"
+          >
+            @for (option of item.dropdown.options; track $index) {
+            <option [value]="option.value">{{ option.label }}</option>
+            }
+          </select>
         </div>
         }
       </div>
-      }
-
+    }
       <div class="col-6 form-container__button">
         <app-button
           [buttonData]="formData()?.buttonForm"

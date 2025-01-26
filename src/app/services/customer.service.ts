@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { environment } from '../environments/environment';
 import { ICustomerResponse } from '../interfaces/customer-response.interface';
 import { Observable } from 'rxjs';
+import { ICustomerRequest } from '../interfaces/customer-request.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,10 @@ export class CustomerService {
 
   getAllCutomers(): Observable<ICustomerResponse[]>{
     return this.http.get<ICustomerResponse[]>(this.base);
+  }
+
+  createCustomer(request: ICustomerRequest): Observable<ICustomerResponse>{
+    return this.http.post<ICustomerResponse>(this.base, request);
   }
 
 }

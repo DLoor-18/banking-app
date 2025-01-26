@@ -35,7 +35,6 @@ export class UserComponent implements OnInit, OnDestroy{
   private tableEventsService = inject(TableEventsService);
   private formService = inject(FormService);
   private userService = inject(UserService);
-  private inputService = inject(InputService);
   private dialogService = inject(DialogService);
   private toastService = inject(ToastService);
   private loaderService = inject(LoaderService);
@@ -81,28 +80,28 @@ export class UserComponent implements OnInit, OnDestroy{
       type: "input",
       name: "firstName",
       class: "col-6",
-      input: this.inputService.generateInputData("firstName", "First Name", "", "John", "text", "firstName", true, false),
+      input: InputService.generateInputData("firstName", "First Name", "", "John", "text", "firstName", true, false),
       validators: [Validators.required]
     },
     {
       type: "input",
       name: "lastName",
       class: "col-6",
-      input: this.inputService.generateInputData("lastName", "Last Name", "", "Doe", "text", "lastName", true, false),
+      input: InputService.generateInputData("lastName", "Last Name", "", "Doe", "text", "lastName", true, false),
       validators: [Validators.required]
     },
     {
       type: "input",
       name: "email",
       class: "col-6",
-      input: this.inputService.generateInputData("email", "Email", "", "john@gmail.com", "text", "email", true, false),
+      input: InputService.generateInputData("email", "Email", "", "john@gmail.com", "text", "email", true, false),
       validators: [Validators.required, Validators.email]
     },
     {
       type: "input",
       name: "password",
       class: "col-6",
-      input: this.inputService.generateInputData("password", "Password", "", "Jhon123.", "text", "password", true, false),
+      input: InputService.generateInputData("password", "Password", "", "Jhon123.", "text", "password", true, false),
       validators: [Validators.required, Validators.pattern('^(?=.*[A-Z])(?=.*\\d)(?=.*[\\W_]).+$')]
     }
 
@@ -162,7 +161,7 @@ export class UserComponent implements OnInit, OnDestroy{
       if(result.length)
         this.cardData.componentInputs['dataBody'] = result;
       else
-        this.toastService.emitToast("Error", "No Users found", "error", 4000, true);
+        this.toastService.emitToast("Error", "No Users found", "error", true);
 
       this.loaderService.show(false);
     });
@@ -176,13 +175,13 @@ export class UserComponent implements OnInit, OnDestroy{
     this.userService.createUser(this.userRequest).pipe(delay(4000),
       concatMap(result => {
         if(result){
-            this.toastService.emitToast("Success", "User created successfully", "success", 4000, true);
+            this.toastService.emitToast("Success", "User created successfully", "success", true);
             this.presentDialog = false;
             this.showModal = false;
             return of (this.getAllUsers()); 
           }
         else{
-          this.toastService.emitToast("Error", "User not created", "error", 4000, true);
+          this.toastService.emitToast("Error", "User not created", "error", true);
           return of(null);
         }
       })

@@ -8,10 +8,12 @@ import { IInput } from '../../interfaces/icomponents/input.interface';
 import { ButtonComponent } from "../button/button.component";
 import { IButton } from '../../interfaces/icomponents/button.interface';
 import { TableEventsService } from '../../services/utils/table-events.service';
+import { BooleanTransformationPipe } from '../../pipes/boolean-transformation.pipe';
+import { DataKeyTranformedPipe } from '../../pipes/data-key-tranformed.pipe';
 
 @Component({
   selector: 'app-table',
-  imports: [BadgeComponent, FormsModule, InputComponent, ButtonComponent],
+  imports: [BadgeComponent, FormsModule, InputComponent, ButtonComponent, BooleanTransformationPipe, DataKeyTranformedPipe],
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss'
 })

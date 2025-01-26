@@ -1,8 +1,8 @@
-import { Component, inject, input, OnDestroy, OnInit } from '@angular/core';
-import { IToast } from '../../interfaces/icomponents/toast.interface';
-import { interval, Subject, takeUntil, timer } from 'rxjs';
-import { ToastService } from '../../services/utils/toast.service';
 import { CommonModule } from '@angular/common';
+import { Component, inject, OnDestroy } from '@angular/core';
+import { Subject, takeUntil, timer } from 'rxjs';
+import { IToast } from '../../interfaces/icomponents/toast.interface';
+import { ToastService } from '../../services/utils/toast.service';
 
 @Component({
   selector: 'app-toast',

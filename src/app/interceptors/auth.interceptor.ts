@@ -22,13 +22,17 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
       catchError((error: HttpErrorResponse) => {
         loaderService.show(false);
         switch (error.status ) {
+          case 400:
+            toastService.emitToast("Error", error.error.message, "error", true);
+            break;
+
           case 401:
             tokenService.revokeToken();
             router.navigate(['/login']);
             break;
 
           case 500:
-            toastService.emitToast("Error", "Please contact support.", "error", 4000, true);
+            toastService.emitToast("Error", "Please contact support.", "error", true);
             break;
 
         } 

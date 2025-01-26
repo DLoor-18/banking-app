@@ -9,7 +9,7 @@
         font-size: .875rem;
     }
 
-    &__input {
+    &__dropdown {
         display: block;
         width: 100%;
         height: calc(1.5em + 1.25rem + 4px);
@@ -22,11 +22,10 @@
         background-clip: padding-box;
         border: 2px solid rgba(0,0,0,.15);
         border-radius: variables.$global-radius;
-        -webkit-transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
         transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     }
 
-    &__input:focus {
+    &__dropdown:focus {
         color: #495057;
         background-color: #fff;
         border-color: variables.$info-color;

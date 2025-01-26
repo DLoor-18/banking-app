@@ -1,3 +1,4 @@
+@use "sass:color";
 @use '../../../assets/styles/abstracts/variables' as variables;
 
 .button {
@@ -21,7 +22,7 @@
     }
 
     &--info:hover {
-        background-color: darken(variables.$info-color, 10%);
+        background-color: color.adjust(variables.$info-color, $lightness: -10%);
     }
 
     &--success {
@@ -29,7 +30,7 @@
     }
 
     &--success:hover {
-        background-color: darken(variables.$success-color, 10%);
+        background-color: color.adjust(variables.$success-color, $lightness: -10%);
     }
 
     &--error {
@@ -37,7 +38,7 @@
     }
 
     &--error:hover {
-        background-color: darken(variables.$error-color, 10%);
+        background-color: color.adjust(variables.$error-color, $lightness: -10%);
     }
 
 }

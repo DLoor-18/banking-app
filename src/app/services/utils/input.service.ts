@@ -8,7 +8,7 @@ export class InputService {
 
   constructor() { }
 
-  generateInputData(id: string, label: string, value: string, placeholder: string, type: string, formControlName: string, required: boolean | true, disabled: boolean | false): IInput {
+  static generateInputData(id: string, label: string, value: string, placeholder: string, type: string, formControlName: string, required: boolean | true, disabled: boolean | false): IInput {
     return {
       id: id,
       label: label,

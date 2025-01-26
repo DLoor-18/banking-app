@@ -22,7 +22,7 @@ export class FormComponent implements OnChanges {
   loadFields: boolean = false;
 
   ngOnChanges(changes: SimpleChanges): void {
-    if(!this.loadFields && this.formData()?.fields) {
+    if (!this.loadFields && this.formData()?.fields) {
       this.buildForm();
     }
   }
@@ -30,16 +30,24 @@ export class FormComponent implements OnChanges {
   buildForm(): void {
     const controls: any = {};
     this.formData()?.fields?.forEach((field) => {
-        controls[field.name] = ['', field.validators || []];
+      const control = this.fb.control(
+        {
+            value: field.input?.value || '',
+            disabled: field.input?.disabled || false
+        },
+          field.validators || []
+      );
+      controls[field.name] = control;
     });
     this.form = this.fb.group(controls);
   }
 
   onSubmit(): void {
-    if (this.form.valid){
+    this.form.markAllAsTouched();
+    if (this.form.valid) {
       this.formService.sendForm(this.form.value);
     } else {
-      this.toastService.emitToast("Error", "Inconsistency in fields", "error", 4000, true);
+      this.toastService.emitToast("Error", "Inconsistency in fields", "error", true);
     }
   }
 

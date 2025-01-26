@@ -1,0 +1,13 @@
+<div class="content">
+    @if (dropdownData()?.label) {
+        <label class="content__label" [for]="dropdownData()?.id">{{ dropdownData()?.label }}</label>
+    }
+
+    <select class="content__dropdown"
+        [id]="dropdownData()?.id"
+        [required]="dropdownData()?.required ?? false" name="" id="">
+        @for (option of dropdownData()?.options; track $index) {
+            <option [value]="option.value">{{ option.label }}</option>
+        }
+    </select>
+</div>

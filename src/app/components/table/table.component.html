@@ -23,8 +23,10 @@
                         <td class="table__cell" role="gridcell">
                             @if (cell.type === "badge") {
                                 <app-badge [data]="getBadge(body[cell.key])"></app-badge>
+                            }@else if (cell.type === "boolean") {
+                                {{ body | dataKeyTranformed: cell.key | booleanTransformation }}
                             } @else {
-                                {{ body[cell.key] }}
+                                {{ body | dataKeyTranformed: cell.key }}
                             }
                         </td>
                     }
