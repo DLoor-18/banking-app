@@ -1,32 +1,30 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
-import { CardComponent } from "../../components/card/card.component";
-import { ModalComponent } from "../../components/modal/modal.component";
-import { DialogComponent } from "../../components/dialog/dialog.component";
-import { LoaderComponent } from "../../components/loader/loader.component";
-import { ToastComponent } from "../../components/toast/toast.component";
+import { Validators } from '@angular/forms';
 import { concatMap, delay, of, Subject, takeUntil } from 'rxjs';
-import { TableEventsService } from '../../services/utils/table-events.service';
-import { FormService } from '../../services/utils/form.service';
-import { ToastService } from '../../services/utils/toast.service';
-import { LoaderService } from '../../services/utils/loader.service';
-import { DialogService } from '../../services/utils/dialog.service';
-import { InputService } from '../../services/utils/input.service';
-import { TransactionTypeService } from '../../services/transaction-type.service';
-import { ITransactionTypeRequest } from '../../interfaces/transaction-type-request.interface';
-import { ITableHeader } from '../../interfaces/icomponents/table-header.interface';
+import { CardComponent } from "../../components/card/card.component";
+import { DialogComponent } from "../../components/dialog/dialog.component";
+import { FormComponent } from '../../components/form/form.component';
+import { ModalComponent } from "../../components/modal/modal.component";
 import { TableComponent } from '../../components/table/table.component';
+import { IButton } from '../../interfaces/icomponents/button.interface';
 import { ICard } from '../../interfaces/icomponents/card.interface';
 import { IField } from '../../interfaces/icomponents/field.interface';
-import { Validators } from '@angular/forms';
-import { IButton } from '../../interfaces/icomponents/button.interface';
 import { IForm } from '../../interfaces/icomponents/form.interface';
 import { IModal } from '../../interfaces/icomponents/modal.interface';
-import { FormComponent } from '../../components/form/form.component';
+import { ITableHeader } from '../../interfaces/icomponents/table-header.interface';
+import { ITransactionTypeRequest } from '../../interfaces/transaction-type-request.interface';
+import { TransactionTypeService } from '../../services/transaction-type.service';
+import { DialogService } from '../../services/utils/dialog.service';
 import { DropdownService } from '../../services/utils/dropdown.service';
+import { FormService } from '../../services/utils/form.service';
+import { InputService } from '../../services/utils/input.service';
+import { LoaderService } from '../../services/utils/loader.service';
+import { TableEventsService } from '../../services/utils/table-events.service';
+import { ToastService } from '../../services/utils/toast.service';
 
 @Component({
   selector: 'app-transaction-type',
-  imports: [CardComponent, ModalComponent, DialogComponent, LoaderComponent, ToastComponent],
+  imports: [CardComponent, ModalComponent, DialogComponent],
   templateUrl: './transaction-type.component.html',
   styleUrl: './transaction-type.component.scss'
 })

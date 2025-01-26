@@ -1,31 +1,29 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
-import { TableComponent } from "../../components/table/table.component";
-import { ITableHeader } from '../../interfaces/icomponents/table-header.interface';
-import { ICard } from '../../interfaces/icomponents/card.interface';
-import { CardComponent } from "../../components/card/card.component";
-import { TableEventsService } from '../../services/utils/table-events.service';
+import { Validators } from '@angular/forms';
 import { concatMap, delay, of, Subject, takeUntil } from 'rxjs';
-import { ToastComponent } from "../../components/toast/toast.component";
-import { ToastService } from '../../services/utils/toast.service';
-import { CustomerService } from '../../services/customer.service';
-import { LoaderService } from '../../services/utils/loader.service';
-import { LoaderComponent } from "../../components/loader/loader.component";
-import { ICustomerRequest } from '../../interfaces/customer-request.interface';
+import { CardComponent } from "../../components/card/card.component";
 import { DialogComponent } from "../../components/dialog/dialog.component";
+import { FormComponent } from '../../components/form/form.component';
 import { ModalComponent } from "../../components/modal/modal.component";
-import { DialogService } from '../../services/utils/dialog.service';
-import { IField } from '../../interfaces/icomponents/field.interface';
+import { TableComponent } from "../../components/table/table.component";
+import { ICustomerRequest } from '../../interfaces/customer-request.interface';
 import { IButton } from '../../interfaces/icomponents/button.interface';
+import { ICard } from '../../interfaces/icomponents/card.interface';
+import { IField } from '../../interfaces/icomponents/field.interface';
 import { IForm } from '../../interfaces/icomponents/form.interface';
 import { IModal } from '../../interfaces/icomponents/modal.interface';
-import { FormComponent } from '../../components/form/form.component';
-import { InputService } from '../../services/utils/input.service';
-import { Validators } from '@angular/forms';
+import { ITableHeader } from '../../interfaces/icomponents/table-header.interface';
+import { CustomerService } from '../../services/customer.service';
+import { DialogService } from '../../services/utils/dialog.service';
 import { FormService } from '../../services/utils/form.service';
+import { InputService } from '../../services/utils/input.service';
+import { LoaderService } from '../../services/utils/loader.service';
+import { TableEventsService } from '../../services/utils/table-events.service';
+import { ToastService } from '../../services/utils/toast.service';
 
 @Component({
   selector: 'app-customer',
-  imports: [CardComponent, ToastComponent, LoaderComponent, DialogComponent, ModalComponent],
+  imports: [CardComponent, DialogComponent, ModalComponent],
   templateUrl: './customer.component.html',
   styleUrl: './customer.component.scss'
 })

@@ -1,35 +1,31 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
-import { CardComponent } from "../../components/card/card.component";
-import { ModalComponent } from "../../components/modal/modal.component";
-import { DialogComponent } from "../../components/dialog/dialog.component";
-import { LoaderComponent } from "../../components/loader/loader.component";
-import { ToastComponent } from "../../components/toast/toast.component";
+import { Validators } from '@angular/forms';
 import { concatMap, delay, of, Subject, takeUntil } from 'rxjs';
-import { TableEventsService } from '../../services/utils/table-events.service';
-import { FormService } from '../../services/utils/form.service';
-import { ToastService } from '../../services/utils/toast.service';
-import { LoaderService } from '../../services/utils/loader.service';
-import { DialogService } from '../../services/utils/dialog.service';
+import { CardComponent } from "../../components/card/card.component";
+import { DialogComponent } from "../../components/dialog/dialog.component";
+import { FormComponent } from '../../components/form/form.component';
+import { ModalComponent } from "../../components/modal/modal.component";
+import { TableComponent } from '../../components/table/table.component';
 import { IAccountRequest } from '../../interfaces/account-request.interface';
-import { ITableHeader } from '../../interfaces/icomponents/table-header.interface';
+import { IButton } from '../../interfaces/icomponents/button.interface';
 import { ICard } from '../../interfaces/icomponents/card.interface';
 import { IField } from '../../interfaces/icomponents/field.interface';
-import { InputService } from '../../services/utils/input.service';
-import { Validators } from '@angular/forms';
-import { IButton } from '../../interfaces/icomponents/button.interface';
 import { IForm } from '../../interfaces/icomponents/form.interface';
 import { IModal } from '../../interfaces/icomponents/modal.interface';
-import { FormComponent } from '../../components/form/form.component';
-import { TableComponent } from '../../components/table/table.component';
+import { ITableHeader } from '../../interfaces/icomponents/table-header.interface';
 import { AccountService } from '../../services/account.service';
 import { CustomerService } from '../../services/customer.service';
-import { IUserResponse } from '../../interfaces/user-response.interface';
-import { ICustomerResponse } from '../../interfaces/customer-response.interface';
+import { DialogService } from '../../services/utils/dialog.service';
 import { DropdownService } from '../../services/utils/dropdown.service';
+import { FormService } from '../../services/utils/form.service';
+import { InputService } from '../../services/utils/input.service';
+import { LoaderService } from '../../services/utils/loader.service';
+import { TableEventsService } from '../../services/utils/table-events.service';
+import { ToastService } from '../../services/utils/toast.service';
 
 @Component({
   selector: 'app-account',
-  imports: [CardComponent, ModalComponent, DialogComponent, LoaderComponent, ToastComponent],
+  imports: [CardComponent, ModalComponent, DialogComponent],
   templateUrl: './account.component.html',
   styleUrl: './account.component.scss'
 })
@@ -38,7 +34,7 @@ export class AccountComponent implements OnInit, OnDestroy {
   private destroyForm$ = new Subject<void>();
   private tableEventsService = inject(TableEventsService);
   private formService = inject(FormService);
-  private Accountservice = inject(AccountService);
+  private accountservice = inject(AccountService);
   private customerService = inject(CustomerService);
   private toastService = inject(ToastService);
   private loaderService = inject(LoaderService);
@@ -177,7 +173,6 @@ export class AccountComponent implements OnInit, OnDestroy {
               ? {...field, dropdown: DropdownService.generateDropdownData("customerId", "Customer", [...customerData], "customerId", true, false)}
               : field);
         this.modalData.componentInputs['formData'].fields = this.fieldData;
-        console.log(this.modalData);
       }
       else
         this.toastService.emitToast("Error", "No customers found", "error", true);
@@ -188,7 +183,7 @@ export class AccountComponent implements OnInit, OnDestroy {
 
   getAllAccounts(){
     this.loaderService.show(true);
-    this.Accountservice.getAllAccounts().subscribe(result => {
+    this.accountservice.getAllAccounts().subscribe(result => {
       if(result.length)
         this.cardData.componentInputs['dataBody'] = result;
       else
@@ -208,7 +203,7 @@ export class AccountComponent implements OnInit, OnDestroy {
       return;
 
     this.loaderService.show(true);
-    this.Accountservice.createAccount(this.accountRequest).pipe(delay(4000),
+    this.accountservice.createAccount(this.accountRequest).pipe(delay(4000),
       concatMap(result => {
         if(result){
             this.toastService.emitToast("Success", "Account created successfully", "success", true);

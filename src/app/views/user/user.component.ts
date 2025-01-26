@@ -2,30 +2,28 @@ import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { concatMap, delay, of, Subject, takeUntil } from 'rxjs';
 import { CardComponent } from "../../components/card/card.component";
+import { DialogComponent } from "../../components/dialog/dialog.component";
 import { FormComponent } from "../../components/form/form.component";
-import { LoaderComponent } from "../../components/loader/loader.component";
 import { ModalComponent } from "../../components/modal/modal.component";
 import { TableComponent } from '../../components/table/table.component';
-import { ToastComponent } from "../../components/toast/toast.component";
 import { IButton } from '../../interfaces/icomponents/button.interface';
 import { ICard } from '../../interfaces/icomponents/card.interface';
 import { IField } from '../../interfaces/icomponents/field.interface';
 import { IForm } from '../../interfaces/icomponents/form.interface';
 import { IModal } from '../../interfaces/icomponents/modal.interface';
 import { ITableHeader } from '../../interfaces/icomponents/table-header.interface';
+import { IUserRequest } from '../../interfaces/user-request.interface';
 import { UserService } from '../../services/user.service';
+import { DialogService } from '../../services/utils/dialog.service';
+import { FormService } from '../../services/utils/form.service';
 import { InputService } from '../../services/utils/input.service';
 import { LoaderService } from '../../services/utils/loader.service';
 import { TableEventsService } from '../../services/utils/table-events.service';
 import { ToastService } from '../../services/utils/toast.service';
-import { DialogComponent } from "../../components/dialog/dialog.component";
-import { FormService } from '../../services/utils/form.service';
-import { IUserRequest } from '../../interfaces/user-request.interface';
-import { DialogService } from '../../services/utils/dialog.service';
 
 @Component({
   selector: 'app-user',
-  imports: [CardComponent, LoaderComponent, ToastComponent, ModalComponent, DialogComponent],
+  imports: [CardComponent, ModalComponent, DialogComponent],
   templateUrl: './user.component.html',
   styleUrl: './user.component.scss'
 })
