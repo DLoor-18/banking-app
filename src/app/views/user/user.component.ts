@@ -156,7 +156,7 @@ export class UserComponent implements OnInit, OnDestroy{
   getAllUsers(){
     this.loaderService.show(true);
     this.userService.getAllUsers().subscribe(result => {
-      if(result.length)
+      if(result.length && this.cardData.componentInputs)
         this.cardData.componentInputs['dataBody'] = result;
       else
         this.toastService.emitToast("Error", "No Users found", "error", true);

@@ -184,7 +184,7 @@ export class AccountComponent implements OnInit, OnDestroy {
   getAllAccounts(){
     this.loaderService.show(true);
     this.accountservice.getAllAccounts().subscribe(result => {
-      if(result.length)
+      if(result.length && this.cardData.componentInputs)
         this.cardData.componentInputs['dataBody'] = result;
       else
         this.toastService.emitToast("Error", "No accounts found", "error", true);

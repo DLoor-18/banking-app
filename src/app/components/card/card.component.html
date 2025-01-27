@@ -5,8 +5,11 @@
         </div>
     }
     <div class="card__body">
-        <ng-container [ngComponentOutlet]="cardData()?.component"
-            [ngComponentOutletInputs]="cardData()?.componentInputs"></ng-container>
-
+        @if(cardData()?.component){
+            <ng-container [ngComponentOutlet]="cardData()?.component"
+                [ngComponentOutletInputs]="cardData()?.componentInputs"></ng-container>
+        } @else {
+            <ng-content></ng-content>
+        }
     </div>
 </div>

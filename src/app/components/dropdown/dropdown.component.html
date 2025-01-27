@@ -3,9 +3,10 @@
         <label class="content__label" [for]="dropdownData()?.id">{{ dropdownData()?.label }}</label>
     }
 
-    <select class="content__dropdown"
+    <select class="content__dropdown" (change)="onChangeEvent($event)"
         [id]="dropdownData()?.id"
         [required]="dropdownData()?.required ?? false" name="" id="">
+        <option value="" disabled selected>Select an option</option>
         @for (option of dropdownData()?.options; track $index) {
             <option [value]="option.value">{{ option.label }}</option>
         }

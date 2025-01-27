@@ -1,6 +1,7 @@
 @use './variables' as variables;
 
 @mixin  margin-locale() {
+    width: 100%;
     max-width: variables.$container-width;
     margin: 20px auto;
 }

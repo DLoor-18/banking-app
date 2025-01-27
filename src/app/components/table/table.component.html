@@ -32,6 +32,13 @@
                     }
                 </tr>
             }
+            @if(dataBodyFiltered.length === 0) {
+                <tr class="table__row" role="row">
+                    <td class="table__empty-cell" colspan="100%">
+                        <span>No records found</span>
+                    </td>
+                </tr>
+            }
         </tbody>
     </table>
 </div>

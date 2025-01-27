@@ -16,6 +16,10 @@ export class TransactionService {
     return this.http.get<ITransactionResponse[]>(this.base);
   }
 
+  findTransactionsByNumberAccount(numberAccount: string): Observable<ITransactionResponse[]>{
+    return this.http.post<ITransactionResponse[]>(this.base + "/number-account", {property: numberAccount});
+  }
+
   createTransaction(request: ITransactionRequest): Observable<ITransactionResponse>{
     return this.http.post<ITransactionResponse>(this.base, request);
   }

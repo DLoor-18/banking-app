@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, OnChanges, output, SimpleChanges } from '@angular/core';
 import { IDropdown } from '../../interfaces/icomponents/dropdown.interface';
 
 @Component({
@@ -9,4 +9,11 @@ import { IDropdown } from '../../interfaces/icomponents/dropdown.interface';
 })
 export class DropdownComponent {
   dropdownData = input<IDropdown>();
+  onChange = output<string>();
+
+  onChangeEvent(event: any) {
+    const selectedValue = (event.target as HTMLSelectElement).value ?? '';
+    this.onChange.emit(selectedValue);
+  }
+
 }

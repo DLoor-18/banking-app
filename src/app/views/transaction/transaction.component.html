@@ -1,5 +1,14 @@
-<section>
-    <app-card [cardData]="cardData"></app-card>
+<section class="transaction">
+    <app-card [cardData]="cardData">
+        <div class="grid transaction__content">
+            <div class="col-6">
+                <app-dropdown [dropdownData]="dropdownAccounts" (onChange)="onChangeAccount($event)"></app-dropdown>
+            </div>
+            <div class="col-12">
+                <app-table [dataHeader]="tableHeader" [dataBody]="transactionsList"></app-table>
+            </div>
+        </div>
+    </app-card>
 </section>
 
 @if (showModal) {

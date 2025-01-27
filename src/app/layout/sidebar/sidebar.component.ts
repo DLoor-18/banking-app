@@ -1,5 +1,6 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, inject, OnInit, Renderer2 } from '@angular/core';
-import { Router } from '@angular/router';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, inject, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter, Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,13 +8,15 @@ import { Router } from '@angular/router';
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss'
 })
-export class SidebarComponent implements OnInit, AfterViewInit {
+export class SidebarComponent implements OnInit, AfterViewInit, OnDestroy {
   private menuLinks: NodeListOf<HTMLAnchorElement> | null = null;
   private collapseBtn: HTMLElement | null = null;
   private sidebar: HTMLElement | null = null;
   private collapsedClass = 'sidebar--collapsed';
 
   private router = inject(Router);
+  private destroy$ = new Subject<void>();
+  currentRoute: string = '';
 
   menu = [
     {
@@ -23,25 +26,25 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     {
       section: false,
       item: "Transactions",
-      href: "transaction",
+      href: "/transaction",
       svg: "assets/svgs/transaction.svg"
     },
     {
       section: false,
       item: "Transaction Types",
-      href: "transaction-type",
+      href: "/transaction-type",
       svg: "assets/svgs/transaction-type.svg"
     },
     {
       section: false,
       item: "Accounts",
-      href: "account",
+      href: "/account",
       svg: "assets/svgs/account.svg"
     },
     {
       section: false,
       item: "Customers",
-      href: "customer",
+      href: "/customer",
       svg: "assets/svgs/customer.svg"
     },
     {
@@ -51,15 +54,26 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     {
       section: false,
       item: "Users",
-      href: "user",
+      href: "/user",
       svg: "assets/svgs/user.svg"
     }
   ];
 
   constructor(private renderer: Renderer2, private el: ElementRef, private cdr: ChangeDetectorRef) { }
+
   ngOnInit(): void {
     this.collapseBtn = this.el.nativeElement.querySelector('.sidebar__content__menu__button-collapse');
     this.sidebar = this.el.nativeElement.querySelector('.sidebar');
+
+    this.currentRoute = this.router.url;
+    this.router.events
+      .pipe(
+        filter((event): event is NavigationEnd => event instanceof NavigationEnd),
+        takeUntil(this.destroy$)
+      )
+      .subscribe(event => {
+        this.currentRoute = event.urlAfterRedirects;
+    });
   }
 
   ngAfterViewInit(): void {
@@ -103,6 +117,15 @@ export class SidebarComponent implements OnInit, AfterViewInit {
 
   goTo(href: string): void {
     this.router.navigate([href]);
+  }
+
+  isActive(option: any): boolean {
+    return option.href && this.currentRoute === option.href;
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
 }

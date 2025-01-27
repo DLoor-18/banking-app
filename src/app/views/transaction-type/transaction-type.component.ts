@@ -176,7 +176,7 @@ export class TransactionTypeComponent  implements OnInit, OnDestroy {
   getAllTransactionTypes(){
     this.loaderService.show(true);
     this.transactionTypeService.getAllTransactionTypes().subscribe(result => {
-      if(result.length)
+      if(result.length && this.cardData.componentInputs)
         this.cardData.componentInputs['dataBody'] = result;
       else
         this.toastService.emitToast("Error", "No Transaction Types found", "error", true);

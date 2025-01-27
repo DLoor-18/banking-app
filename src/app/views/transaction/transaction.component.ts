@@ -1,19 +1,25 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
-import { CardComponent } from "../../components/card/card.component";
-import { ModalComponent } from "../../components/modal/modal.component";
-import { DialogComponent } from "../../components/dialog/dialog.component";
 import { Validators } from '@angular/forms';
-import { Subject, takeUntil, delay, concatMap, of } from 'rxjs';
+import { concatMap, delay, of, Subject, takeUntil } from 'rxjs';
+import { CardComponent } from "../../components/card/card.component";
+import { DialogComponent } from "../../components/dialog/dialog.component";
+import { DropdownComponent } from "../../components/dropdown/dropdown.component";
 import { FormComponent } from '../../components/form/form.component';
+import { ModalComponent } from "../../components/modal/modal.component";
 import { TableComponent } from '../../components/table/table.component';
-import { IAccountRequest } from '../../interfaces/account-request.interface';
+import { IAccountResponse } from '../../interfaces/account-response.interface';
 import { IButton } from '../../interfaces/icomponents/button.interface';
 import { ICard } from '../../interfaces/icomponents/card.interface';
+import { IDropdown } from '../../interfaces/icomponents/dropdown.interface';
 import { IField } from '../../interfaces/icomponents/field.interface';
 import { IForm } from '../../interfaces/icomponents/form.interface';
 import { IModal } from '../../interfaces/icomponents/modal.interface';
 import { ITableHeader } from '../../interfaces/icomponents/table-header.interface';
+import { ITransactionRequest } from '../../interfaces/transaction-request.interface';
+import { ITransactionTypeResponse } from '../../interfaces/transaction-type-response.interface';
 import { AccountService } from '../../services/account.service';
+import { TransactionTypeService } from '../../services/transaction-type.service';
+import { TransactionService } from '../../services/transaction.service';
 import { DialogService } from '../../services/utils/dialog.service';
 import { DropdownService } from '../../services/utils/dropdown.service';
 import { FormService } from '../../services/utils/form.service';
@@ -21,15 +27,10 @@ import { InputService } from '../../services/utils/input.service';
 import { LoaderService } from '../../services/utils/loader.service';
 import { TableEventsService } from '../../services/utils/table-events.service';
 import { ToastService } from '../../services/utils/toast.service';
-import { TransactionTypeService } from '../../services/transaction-type.service';
-import { TransactionService } from '../../services/transaction.service';
-import { ITransactionRequest } from '../../interfaces/transaction-request.interface';
-import { IAccountResponse } from '../../interfaces/account-response.interface';
-import { ITransactionTypeResponse } from '../../interfaces/transaction-type-response.interface';
 
 @Component({
   selector: 'app-transaction',
-  imports: [CardComponent, ModalComponent, DialogComponent],
+  imports: [CardComponent, ModalComponent, DialogComponent, DropdownComponent, TableComponent],
   templateUrl: './transaction.component.html',
   styleUrl: './transaction.component.scss'
 })
@@ -48,6 +49,8 @@ export class TransactionComponent implements OnInit, OnDestroy {
   private transactionRequest: ITransactionRequest | undefined;
   private accounts: IAccountResponse[] = [];
   private transactionTypes: ITransactionTypeResponse[] = [];
+  private accountSelected: string = '';
+  transactionsList: any [] = [];
 
   showModal = false;
   presentDialog = true;
@@ -90,13 +93,8 @@ export class TransactionComponent implements OnInit, OnDestroy {
     }
   ];
 
-  cardData: ICard = {
+  cardData: ICard =  {
     header: "Transactions",
-    component: TableComponent,
-    componentInputs: {
-      dataHeader: this.tableHeader,
-      dataBody: []
-    }
   };
   
   fieldData: IField[] = [
@@ -149,6 +147,8 @@ export class TransactionComponent implements OnInit, OnDestroy {
     }
   };
 
+  dropdownAccounts: IDropdown | undefined;
+
   constructor(){
     this.tableEventsService.event$.pipe(takeUntil(this.destroyTableEvent$)).subscribe(event => {
         this.showModal = true;
@@ -182,19 +182,30 @@ export class TransactionComponent implements OnInit, OnDestroy {
     this.destroyForm$.complete();
   }
 
+  onChangeAccount(numberAccount: string) {
+    this.findTransactionsByNumberAccount(numberAccount);
+    this.accountSelected = numberAccount;
+  }
+
   getAllAccounts() {
     this.loaderService.show(true);
     this.accountservice.getAllAccounts().subscribe(result => {
       if(result.length){
         this.accounts = result;
         let accountData: any[] = [];
-        
+        let dropdownAccounts: any[] = [];
+
         result.forEach(account => {
           account.status === 'ACTIVE' && accountData.push({
             label: account.accountNumber + ' - ' + account.user.firstName + ' ' + account.user.lastName + ' ($' + account.balance + ')',
             value: account.id});
+
+            dropdownAccounts.push({
+              label: account.accountNumber + ' - ' + account.user.firstName + ' ' + account.user.lastName + ' ($' + account.balance + ')',
+              value: account.accountNumber});
         });
 
+        this.dropdownAccounts = DropdownService.generateDropdownData("accountId", "Account", [...dropdownAccounts], "accountId", true, false);
         this.fieldData = this.fieldData.map(field => 
           field.name === 'accountId' 
               ? {...field, dropdown: DropdownService.generateDropdownData("accountId", "Account", [...accountData], "accountId", true, false)}
@@ -238,9 +249,25 @@ export class TransactionComponent implements OnInit, OnDestroy {
     this.loaderService.show(true);
     this.transactionService.getAllTransactions().subscribe(result => {
       if(result.length)
-        this.cardData.componentInputs['dataBody'] = result;
-      else
-        this.toastService.emitToast("Error", "No transactions found", "error", true);
+        this.transactionsList =[...result.reverse()];
+      else{
+        this.toastService.emitToast("Info", "No transactions found", "info", true);
+        this.transactionsList = [];
+      }
+
+      this.loaderService.show(false);
+    });
+  }
+
+  findTransactionsByNumberAccount(numberAccount: string) {
+    this.loaderService.show(true);
+    this.transactionService.findTransactionsByNumberAccount(numberAccount).subscribe(result => {
+      if(result.length)
+        this.transactionsList = [...result.reverse()];
+      else{
+        this.toastService.emitToast("Info", "No transactions found", "info", true);
+        this.transactionsList = [];
+      }
 
       this.loaderService.show(false);
     });
@@ -252,26 +279,31 @@ export class TransactionComponent implements OnInit, OnDestroy {
   }
 
   createTransaction() {
-    // if(!this.accountRequest) 
-    //   return;
+    if(!this.transactionRequest) 
+      return;
 
-    // this.loaderService.show(true);
-    // this.Accountservice.createAccount(this.accountRequest).pipe(delay(4000),
-    //   concatMap(result => {
-    //     if(result){
-    //         this.toastService.emitToast("Success", "Account created successfully", "success", true);
-    //         this.presentDialog = false;
-    //         this.showModal = false;
-    //         return of (this.getAllAccounts()); 
-    //       }
-    //     else{
-    //       this.toastService.emitToast("Error", "Account not created", "error", true);
-    //       return of(null);
-    //     }
-    //   })
-    // ).subscribe(() => { 
-    //   this.loaderService.show(false);
-    // });
+    let account = this.accounts.find(account => account.id === this.transactionRequest?.accountId);
+    this.transactionRequest.accountNumber = account?.accountNumber ?? '';
+    this.loaderService.show(true);
+    this.transactionService.createTransaction(this.transactionRequest).pipe(delay(4000),
+      concatMap(result => {
+        if(result) {
+            this.toastService.emitToast("Success", "Transaction created successfully", "success", true);
+            this.presentDialog = false;
+            this.showModal = false;
+            
+            return this.accountSelected === '' ? 
+              of (this.getAllAccounts(), this.getAllTransactions()) : 
+              of (this.getAllAccounts(), this.findTransactionsByNumberAccount(this.accountSelected)); 
+          }
+        else {
+          this.toastService.emitToast("Error", "Transaction not created", "error", true);
+          return of(null);
+        }
+      })
+    ).subscribe(() => { 
+      this.loaderService.show(false);
+    });
   }
 
 }

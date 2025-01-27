@@ -1,4 +1,8 @@
-.welcome-text {
-    font-size: 20px;
-    font-style: italic;
-}
+.welcome{
+    width: 100%;
+
+    &__text{
+        font-size: 20px;
+        font-style: italic;
+    }
+} 

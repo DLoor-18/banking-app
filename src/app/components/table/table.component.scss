@@ -58,18 +58,18 @@
         }
     }
 
-    &__cell {
+    &__cell, &__empty-cell {
         border-bottom: 1px solid #e2e5e8;
         font-size: 13px;
         color: variables.$primary-color;
         padding: 1.20rem .75rem;
         text-align: left;
-
-        &:last-child {
-            flex: 0;
-        }
     }
 
+    &__cell &:last-child {
+        flex: 0;
+    }
+    
     &__priority {
         padding: 5px 10px;
         border-radius: 4px;
