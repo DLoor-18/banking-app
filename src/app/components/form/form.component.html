@@ -1,5 +1,5 @@
 <div class="form-container">
-  <form action="" [formGroup]="form">
+  <form action="" [formGroup]="form" aria-label="Data Form">
     <div class="grid">
       @for (item of formData()?.fields; track $index) {
       <div [class]="item.class">

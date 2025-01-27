@@ -6,7 +6,9 @@
     <select class="content__dropdown" (change)="onChangeEvent($event)"
         [id]="dropdownData()?.id"
         [formControlName]="dropdownData()?.formControlName ?? ''"
-        [required]="dropdownData()?.required ?? false" name="" id="">
+        [required]="dropdownData()?.required ?? false" name="" id=""
+        [attr.aria-label]="dropdownData()?.label"
+        [attr.aria-required]="dropdownData()?.required ?? null">
         <option value="" disabled selected>Select an option</option>
         @for (option of dropdownData()?.options; track $index) {
             <option [value]="option.value">{{ option.label }}</option>

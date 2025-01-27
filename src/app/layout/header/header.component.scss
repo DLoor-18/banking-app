@@ -42,9 +42,9 @@
 
     }
 
-    &__user-options:hover {
+    &__user-options:hover, &__user-options:focus {
         cursor: pointer;
-        transition: 10s;
+        transition: 15s;
 
         menu {
             opacity: 1;
@@ -64,7 +64,7 @@
         border-radius: 4px;
         opacity: 0;
         visibility: hidden;
-        transition: opacity 0.2s, visibility 0.2s;
+        transition: opacity 0.5s, visibility 0.5s;
 
         &__item {
             text-decoration: none;

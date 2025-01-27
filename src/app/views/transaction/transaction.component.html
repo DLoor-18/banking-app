@@ -2,7 +2,9 @@
     <app-card [cardData]="cardData">
         <div class="grid transaction__content">
             <div class="col-6">
-                <app-dropdown [dropdownData]="dropdownAccounts" (onChange)="onChangeAccount($event)"></app-dropdown>
+                @if (dropdownAccounts) {
+                    <app-dropdown [dropdownData]="dropdownAccounts" [formGroup]="accountFormGroup" (onChange)="onChangeAccount($event)"></app-dropdown>
+                }
             </div>
             <div class="col-12">
                 <app-table [dataHeader]="tableHeader" [dataBody]="transactionsList"></app-table>

@@ -1,8 +1,8 @@
-<div class="layout-container">
-    <app-sidebar></app-sidebar>
+<div class="layout-container" tabindex="0">
+    <app-sidebar role="navigation"></app-sidebar>
     <div class="layout-container__content">
         <app-header></app-header>
-        <main>
+        <main role="main">
             <router-outlet></router-outlet>
         </main>
         <app-footer></app-footer>

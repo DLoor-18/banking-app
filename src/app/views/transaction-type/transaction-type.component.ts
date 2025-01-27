@@ -155,6 +155,7 @@ export class TransactionTypeComponent  implements OnInit, OnDestroy {
     });
 
     this.formService.$formData.pipe(takeUntil(this.destroyForm$)).subscribe(formData => {
+      debugger
       this.transactionTypeRequest = formData as ITransactionTypeRequest;
       this.transactionTypeRequest.status = this.transactionTypeRequest.status ?? 'ACTIVE';
       this.dialogConfirm();

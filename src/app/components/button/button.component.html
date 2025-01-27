@@ -1,6 +1,8 @@
-<button 
+<button role="button"
     [class]="'button button--' + buttonData()?.type" 
     [disabled]="buttonData()?.disabled"
-    (click)="clickedEvent()">
+    (click)="clickedEvent()"
+    [attr.aria-label]="buttonData()?.value"
+    [attr.aria-disabled]="buttonData()?.disabled ? true : null">
     {{ buttonData()?.value }} 
 </button>

@@ -11,17 +11,17 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const loaderService = inject(LoaderService);
   const toastService = inject(ToastService);
   const router = inject(Router);
-  
+  let authReq = undefined;
+
   if (tokenService.isAuthenticated()) {
-    const authReq = req.clone({
+    authReq = req.clone({
       setHeaders: {
         Authorization: `Bearer ${tokenService.getToken()}`,
       },
     });
-    return next(authReq);
   }
 
-  return next(req).pipe(
+  return next(authReq ?? req).pipe(
     catchError((error: HttpErrorResponse) => {
       loaderService.show(false);
       switch (error.status ) {
@@ -35,7 +35,6 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
           break;
 
         case 403:
-          debugger
           toastService.emitToast("Error", error.error.message, "error", true);
           break;
 

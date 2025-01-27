@@ -1,5 +1,5 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
-import { Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { concatMap, delay, of, Subject, takeUntil } from 'rxjs';
 import { CardComponent } from "../../components/card/card.component";
 import { DialogComponent } from "../../components/dialog/dialog.component";
@@ -147,6 +147,8 @@ export class TransactionComponent implements OnInit, OnDestroy {
     }
   };
 
+  accountFormGroup = new FormGroup({'accountId': new FormControl()});
+
   dropdownAccounts: IDropdown | undefined;
 
   constructor(){
@@ -251,7 +253,7 @@ export class TransactionComponent implements OnInit, OnDestroy {
       if(result.length)
         this.transactionsList =[...result.reverse()];
       else{
-        this.toastService.emitToast("Info", "No transactions found", "info", true);
+        this.toastService.emitToast("Error", "No transactions found", "error", true);
         this.transactionsList = [];
       }
 

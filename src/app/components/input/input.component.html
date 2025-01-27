@@ -8,5 +8,7 @@
     (input)="inputEvent($event)" 
     [placeholder]="inputData()?.placeholder"
     [formControlName]="inputData()?.formControlName ?? ''"
-    [required]="inputData()?.required ?? false">
+    [required]="inputData()?.required ?? false"
+    [attr.aria-label]="inputData()?.label"
+    [attr.aria-required]="inputData()?.required ?? null">
 </div>
