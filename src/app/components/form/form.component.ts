@@ -5,10 +5,12 @@ import { IForm } from '../../interfaces/icomponents/form.interface';
 import { ButtonComponent } from "../button/button.component";
 import { ToastService } from '../../services/utils/toast.service';
 import { FormService } from '../../services/utils/form.service';
+import { InputComponent } from "../input/input.component";
+import { DropdownComponent } from "../dropdown/dropdown.component";
 
 @Component({
   selector: 'app-form',
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, ButtonComponent],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, ButtonComponent, InputComponent, DropdownComponent],
   templateUrl: './form.component.html',
   styleUrl: './form.component.scss'
 })

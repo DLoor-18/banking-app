@@ -1,10 +1,11 @@
-<div class="content">
+<div class="content" [formGroup]="formGroup()!">
     @if (dropdownData()?.label) {
         <label class="content__label" [for]="dropdownData()?.id">{{ dropdownData()?.label }}</label>
     }
 
     <select class="content__dropdown" (change)="onChangeEvent($event)"
         [id]="dropdownData()?.id"
+        [formControlName]="dropdownData()?.formControlName ?? ''"
         [required]="dropdownData()?.required ?? false" name="" id="">
         <option value="" disabled selected>Select an option</option>
         @for (option of dropdownData()?.options; track $index) {

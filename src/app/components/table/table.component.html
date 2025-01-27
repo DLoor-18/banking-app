@@ -3,7 +3,7 @@
         @if (buttonData) {
             <app-button class="col-2" [buttonData]="buttonData" (clickEvent)="onButtonClick($event)"></app-button>
         }
-        <app-input class="col-4" [inputData]="inputData" (outputData)="onSearch($event)"></app-input>
+        <app-input class="col-4" [inputData]="inputData" [formGroup]="formGroup" (outputData)="onSearch($event)"></app-input>
     </div>
 
     <table class="table__content" role="grid" aria-label="Data Table">

@@ -2,7 +2,7 @@ import { Component, inject, input, OnChanges, OnInit, output, SimpleChanges } fr
 import { ITableHeader } from '../../interfaces/icomponents/table-header.interface';
 import { BadgeComponent } from "../badge/badge.component";
 import { IBadge } from '../../interfaces/icomponents/badge.interface';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule } from '@angular/forms';
 import { InputComponent } from "../input/input.component";
 import { IInput } from '../../interfaces/icomponents/input.interface';
 import { ButtonComponent } from "../button/button.component";
@@ -24,12 +24,15 @@ export class TableComponent implements OnInit, OnChanges{
 
   private tableEventsService = inject(TableEventsService);
 
+  formGroup = new FormGroup({'search': new FormControl()});
+  
   inputData: IInput = {
     id: "search",
     label: "Search",
     value: "",
     placeholder: "Search...",
     type: "text",
+    formControlName: "search",
     required: false,
     disabled: false
   };

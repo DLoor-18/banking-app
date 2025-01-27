@@ -18,28 +18,34 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
         Authorization: `Bearer ${tokenService.getToken()}`,
       },
     });
-    return next(authReq).pipe(
-      catchError((error: HttpErrorResponse) => {
-        loaderService.show(false);
-        switch (error.status ) {
-          case 400:
-            toastService.emitToast("Error", error.error.message, "error", true);
-            break;
-
-          case 401:
-            tokenService.revokeToken();
-            router.navigate(['/login']);
-            break;
-
-          case 500:
-            toastService.emitToast("Error", "Please contact support.", "error", true);
-            break;
-
-        } 
-        return throwError(() => error);
-      })
-    );
+    return next(authReq);
   }
 
-  return next(req);
+  return next(req).pipe(
+    catchError((error: HttpErrorResponse) => {
+      loaderService.show(false);
+      switch (error.status ) {
+        case 400:
+          toastService.emitToast("Error", error.error.message, "error", true);
+          break;
+
+        case 401:
+          tokenService.revokeToken();
+          router.navigate(['/login']);
+          break;
+
+        case 403:
+          debugger
+          toastService.emitToast("Error", error.error.message, "error", true);
+          break;
+
+        case 500:
+          toastService.emitToast("Error", "Please contact support.", "error", true);
+          break;
+
+      } 
+      return throwError(() => error);
+    })
+  );
+  
 };

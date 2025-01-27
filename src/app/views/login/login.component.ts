@@ -29,9 +29,18 @@ export class LoginComponent implements OnInit {
     password: ['', [Validators.required]]
   });
 
+  ngOnInit(): void {
+    if(this.tokenService.isAuthenticated()) {
+      this.router.navigate(['']);
+    }
+  }
+
   auth() {
+    this.authForm.markAllAsTouched();
     if(this.authForm.valid){
       this.validateCredentials();
+    } else {
+      this.toastService.emitToast("Error", "Inconsistency in fields", "error", true);
     }
   }
 
@@ -60,10 +69,6 @@ export class LoginComponent implements OnInit {
 
   }
 
-  ngOnInit(): void {
-    if(this.tokenService.isAuthenticated()) {
-      this.router.navigate(['']);
-    }
-  }
+
 
 }
